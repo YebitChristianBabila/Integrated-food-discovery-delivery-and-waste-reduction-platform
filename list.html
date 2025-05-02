@@ -1,0 +1,74 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FoodSave | List</title>
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+   
+<!-- Include header -->
+<div class="container py-5">
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <h1 class="fw-bold mb-0">Restaurants Near You</h1>
+            <p class="text-muted">Showing results for <span class="fw-bold">New York</span></p>
+        </div>
+        <div class="col-md-6">
+            <div class="d-flex gap-3">
+                <div class="flex-grow-1">
+                    <input type="text" class="form-control" placeholder="Search restaurants...">
+                </div>
+                <div class="dropdown">
+                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                        <i class="fas fa-sliders-h me-1"></i> Filters
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end p-3" style="width: 300px;">
+                        <li>
+                            <label class="form-label">Cuisine</label>
+                            <select class="form-select mb-3">
+                                <option>All Cuisines</option>
+                                <option>Italian</option>
+                                <option>Mexican</option>
+                                <option>Asian</option>
+                            </select>
+                        </li>
+                        <li>
+                            <label class="form-label">Sort By</label>
+                            <select class="form-select mb-3">
+                                <option>Recommended</option>
+                                <option>Rating</option>
+                                <option>Distance</option>
+                                <option>Most Surplus</option>
+                            </select>
+                        </li>
+                        <li>
+                            <div class="d-grid">
+                                <button class="btn btn-success">Apply Filters</button>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+   
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>

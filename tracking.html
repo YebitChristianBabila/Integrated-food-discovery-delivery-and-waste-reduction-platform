@@ -1,0 +1,297 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order Tracking | FoodSave</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Base Styles */
+:root {
+    --primary: #4CAF50; /* FoodSave brand green */
+    --primary-light: #E8F5E9;
+    --warning: #FFC107; /* For in-progress status */
+    --danger: #FF5252; /* For discounts */
+    --dark: #212121;
+    --gray: #757575;
+    --light-gray: #F5F5F5;
+    --border-gray: #E0E0E0;
+  }
+  
+  body {
+    font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+    color: var(--dark);
+    background-color: #FAFAFA;
+    line-height: 1.6;
+  }
+  
+  /* Typography */
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+  }
+  
+  .text-muted {
+    color: var(--gray) !important;
+  }
+  
+  /* Layout */
+  .container {
+    max-width: 1200px;
+  }
+  
+  /* Cards */
+  .card {
+    border: none;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  }
+  
+  .card-header {
+    padding: 1.25rem 1.5rem;
+    background-color: white;
+    border-bottom: 1px solid var(--border-gray);
+  }
+  
+  /* Badges */
+  .badge {
+    font-weight: 500;
+    padding: 0.5em 0.8em;
+    border-radius: 50px;
+  }
+  
+  .bg-warning {
+    background-color: var(--warning) !important;
+    color: var(--dark);
+  }
+  
+  .bg-danger {
+    background-color: var(--danger) !important;
+  }
+  
+  /* Timeline */
+  .timeline {
+    position: relative;
+    padding-left: 2rem;
+  }
+  
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 1rem;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background-color: var(--light-gray);
+  }
+  
+  .timeline-step {
+    position: relative;
+    padding-bottom: 1.5rem;
+  }
+  
+  .timeline-step:last-child {
+    padding-bottom: 0;
+  }
+  
+  .timeline-icon {
+    position: absolute;
+    left: -2rem;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    border: 2px solid var(--light-gray);
+    color: var(--gray);
+  }
+  
+  .timeline-step.completed .timeline-icon {
+    background-color: var(--primary);
+    border-color: var(--primary);
+    color: white;
+  }
+  
+  .timeline-step.active .timeline-icon {
+    background-color: var(--warning);
+    border-color: var(--warning);
+    color: var(--dark);
+    animation: pulse 2s infinite;
+  }
+  
+  .timeline-content {
+    padding-left: 1rem;
+  }
+  
+  /* Alert for driver info */
+  .alert {
+    border-radius: 8px;
+    padding: 0.5rem 0.75rem !important;
+    font-size: 0.875rem;
+  }
+  
+  .alert-success {
+    background-color: var(--primary-light);
+    border-color: var(--primary-light);
+    color: var(--dark);
+  }
+  
+  /* List Group */
+  .list-group-item {
+    padding: 1rem 0;
+    border-color: var(--border-gray);
+  }
+  
+  .list-group-item:first-child {
+    border-top: none;
+  }
+  
+  /* Buttons */
+  .btn {
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+  }
+  
+  .btn-outline-primary {
+    color: var(--primary);
+    border-color: var(--primary);
+  }
+  
+  .btn-outline-primary:hover {
+    background-color: var(--primary);
+    color: white;
+  }
+  
+  /* Order Summary */
+  .border-top {
+    border-top: 1px solid var(--border-gray) !important;
+  }
+  
+  /* Animations */
+  @keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(255, 193, 7, 0.4); }
+    70% { box-shadow: 0 0 0 8px rgba(255, 193, 7, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(255, 193, 7, 0); }
+  }
+  
+  /* Responsive Adjustments */
+  @media (max-width: 768px) {
+    .card-body {
+      padding: 1.25rem;
+    }
+    
+    .timeline {
+      padding-left: 1.5rem;
+    }
+    
+    .timeline::before {
+      left: 0.75rem;
+    }
+    
+    .timeline-icon {
+      left: -1.5rem;
+      width: 1.5rem;
+      height: 1.5rem;
+      font-size: 0.75rem;
+    }
+    
+    .btn {
+      padding: 0.625rem 1.25rem;
+    }
+  }
+  </style>
+</head>
+<body>
+  <!-- Navbar would be included here -->
+  
+  <div class="container py-5">
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        <div class="card shadow-sm mb-4">
+          <div class="card-header bg-white border-bottom">
+            <div class="d-flex justify-content-between align-items-center">
+              <h2 class="h5 mb-0 fw-bold">Order #FS-9845</h2>
+              <span class="badge bg-warning text-dark">On the way</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-6 mb-4 mb-md-0">
+                <h5 class="fw-bold mb-3">Order Details</h5>
+                <div class="mb-3">
+                  <p class="small text-muted mb-1">Order placed</p>
+                  <p class="fw-bold">June 12, 2023 at 2:45 PM</p>
+                </div>
+                <div class="mb-3">
+                  <p class="small text-muted mb-1">Estimated delivery</p>
+                  <p class="fw-bold">June 12, 2023 by 3:30 PM</p>
+                </div>
+                <div class="mb-3">
+                  <p class="small text-muted mb-1">Delivery address</p>
+                  <p class="fw-bold">123 Main St, Apt 4B<br>New York, NY 10001</p>
+                </div>
+                <div class="mb-3">
+                  <p class="small text-muted mb-1">Payment method</p>
+                  <div class="d-flex align-items-center">
+                    <img src="images/visa.png" height="20" class="me-2">
+                    <span class="fw-bold">Visa ending in 4242</span>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="col-md-6">
+                <h5 class="fw-bold mb-3">Delivery Progress</h5>
+                <div class="timeline">
+                  <div class="timeline-step completed">
+                    <div class="timeline-content">
+                      <div class="timeline-icon">
+                        <i class="fas fa-check"></i>
+                      </div>
+                      <h6 class="fw-bold">Order confirmed</h6>
+                      <p class="small text-muted">2:46 PM</p>
+                    </div>
+                  </div>
+                  <div class="timeline-step completed">
+                    <div class="timeline-content">
+                      <div class="timeline-icon">
+                        <i class="fas fa-check"></i>
+                      </div>
+                      <h6 class="fw-bold">Preparing your order</h6>
+                      <p class="small text-muted">2:50 PM</p>
+                    </div>
+                  </div>
+                  <div class="timeline-step active">
+                    <div class="timeline-content">
+                      <div class="timeline-icon">
+                        <i class="fas fa-motorcycle"></i>
+                      </div>
+                      <h6 class="fw-bold">On the way</h6>
+                      <p class="small text-muted">3:05 PM</p>
+                      <div class="alert alert-success mt-2 p-2 small">
+                        <i class="fas fa-user-circle me-1"></i> Your driver is <strong>Michael</strong>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="timeline-step">
+                    <div class="timeline-content">
+                      <div class="timeline-icon">
+                        <i class="fas fa-home"></i>
+                      </div>
+                      <h6 class="fw-bold">Delivered</h6>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        
+</body>
+</html>

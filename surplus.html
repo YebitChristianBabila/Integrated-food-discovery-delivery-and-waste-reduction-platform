@@ -1,0 +1,374 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FoodSave | SurplusFood</title>
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="index.css">
+  <style>
+    :root {
+      --primary: #2e7d32;
+      --primary-dark: #1b5e20;
+      --primary-light: #81c784;
+      --accent: #ff8f00;
+      --dark: #263238;
+      --light: #f5f5f5;
+      --white: #ffffff;
+    }
+
+    .surplus-hero {
+      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+      background-size: cover;
+      background-position: center;
+      color: white;
+      padding: 6rem 0;
+      text-align: center;
+    }
+
+    .surplus-hero h1 {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .surplus-hero p {
+      font-size: 1.25rem;
+      max-width: 700px;
+      margin: 0 auto 2rem;
+    }
+
+    .search-bar {
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .search-bar input {
+      padding: 1rem 1.5rem;
+      border-radius: 50px;
+      border: none;
+      width: 100%;
+      font-size: 1.1rem;
+    }
+
+    .search-bar button {
+      position: absolute;
+      right: 5px;
+      top: 5px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 50px;
+      padding: 0.75rem 1.5rem;
+      font-weight: 600;
+    }
+
+    .filter-section {
+      background-color: var(--white);
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      margin-bottom: 2rem;
+    }
+
+    .filter-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+
+    .filter-tag {
+      background-color: var(--light);
+      border-radius: 50px;
+      padding: 0.5rem 1.25rem;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .filter-tag:hover, .filter-tag.active {
+      background-color: var(--primary);
+      color: white;
+    }
+
+    .food-card {
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+      transition: all 0.3s ease;
+      margin-bottom: 2rem;
+      background: white;
+    }
+
+    .food-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+    }
+
+    .food-img {
+      height: 200px;
+      object-fit: cover;
+      width: 100%;
+    }
+
+    .food-badge {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background-color: var(--accent);
+      color: white;
+      padding: 0.25rem 0.75rem;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    .food-info {
+      padding: 1.5rem;
+    }
+
+    .food-info h3 {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .food-restaurant {
+      color: var(--primary);
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
+    .food-desc {
+      color: var(--dark);
+      margin-bottom: 1rem;
+      font-size: 0.95rem;
+    }
+
+    .food-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .food-price {
+      font-weight: 700;
+      font-size: 1.25rem;
+    }
+
+    .food-original-price {
+      text-decoration: line-through;
+      color: var(--text-light);
+      font-size: 0.9rem;
+    }
+
+    .food-discount {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .food-time {
+      color: var(--text-light);
+      font-size: 0.9rem;
+    }
+
+    .btn-add {
+      background-color: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 0.75rem;
+      width: 100%;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .btn-add:hover {
+      background-color: var(--primary-dark);
+      transform: translateY(-2px);
+    }
+
+    .view-more {
+      text-align: center;
+      margin-top: 3rem;
+    }
+
+    .btn-view-more {
+      background-color: white;
+      color: var(--primary);
+      border: 2px solid var(--primary);
+      border-radius: 50px;
+      padding: 0.75rem 2rem;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .btn-view-more:hover {
+      background-color: var(--primary);
+      color: white;
+    }
+
+    @media (max-width: 768px) {
+      .surplus-hero {
+        padding: 4rem 1rem;
+      }
+      
+      .surplus-hero h1 {
+        font-size: 2.25rem;
+      }
+      
+      .food-card {
+        margin-bottom: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-success sticky-top">
+    <div class="container">
+        <a class="navbar-brand fw-bold" href="/">
+            <img src="images/logo.jpg" alt="FoodSave" height="30"> FoodSave
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="list.html">Restaurants</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="surplus.html">Surplus Deals</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="donate.html">Donate Food</a>
+                </li>
+            </ul>
+            <div class="d-flex">
+                <a href="login.html" class="btn btn-outline-light me-2">Login</a>
+                <a href="register.html" class="btn btn-light text-success">Sign Up</a>
+            </div>
+        </div>
+    </div>
+</nav>
+  
+  <section class="surplus-hero">
+    <div class="container">
+      <h1>Today's Surplus Deals</h1>
+      <p>Discover delicious meals at discounted prices while helping reduce food waste in your community</p>
+      <div class="search-bar">
+        <input type="text" placeholder="Search for meals or restaurants...">
+        <button><i class="fas fa-search me-2"></i> Search</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="container my-5">
+    <div class="filter-section">
+      <h4>Filter by:</h4>
+      <div class="filter-tags">
+        <div class="filter-tag active">All</div>
+        <div class="filter-tag">Vegetarian</div>
+        <div class="filter-tag">Vegan</div>
+        <div class="filter-tag">Gluten-Free</div>
+        <div class="filter-tag">Under $5</div>
+        <div class="filter-tag">Expiring Soon</div>
+        <div class="filter-tag">Near Me</div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6 col-lg-4">
+        <div class="food-card">
+          <div class="position-relative">
+            <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2080&q=80" alt="Food" class="food-img">
+            <div class="food-badge">40% OFF</div>
+          </div>
+          <div class="food-info">
+            <h3>Avocado Toast</h3>
+            <span class="food-restaurant">Green Bites Cafe</span>
+            <p class="food-desc">Fresh avocado on artisan bread with cherry tomatoes and microgreens</p>
+            <div class="food-meta">
+              <div>
+                <span class="food-price">$5.40</span>
+                <span class="food-original-price">$9.00</span>
+                <span class="food-discount ml-2">40% off</span>
+              </div>
+              <div class="food-time">Expires in 2h</div>
+            </div>
+            <button class="btn-add">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+      <!-- Repeat for other food items -->
+    </div>
+
+    <div class="view-more">
+      <button class="btn-view-more">View More Deals</button>
+    </div>
+  </section>
+
+ <!-- Footer -->
+ <footer class="bg-dark text-white pt-5 pb-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <h5 class="fw-bold mb-3">FoodSave</h5>
+                <p>Reducing food waste while helping you discover amazing meals at great prices.</p>
+                <div class="social-icons">
+                    <a href="#" class="text-white me-3"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="text-white me-3"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="text-white me-3"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="col-md-2 mb-4">
+                <h5 class="fw-bold mb-3">Quick Links</h5>
+                <ul class="list-unstyled">
+                    <li class="mb-2"><a href="index.html" class="text-white">Home</a></li>
+                    <li class="mb-2"><a href="About.html" class="text-white">About</a></li>
+                    <li class="mb-2"><a href="list.html" class="text-white">Restaurants</a></li>
+                    <li class="mb-2"><a href="Contact.html" class="text-white">Contact</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3 mb-4">
+                <h5 class="fw-bold mb-3">Legal</h5>
+                <ul class="list-unstyled">
+                    <li class="mb-2"><a href="Privacy.html" class="text-white">Privacy Policy</a></li>
+                    <li class="mb-2"><a href="Terms.html" class="text-white">Terms of Service</a></li>
+                    <li class="mb-2"><a href="Cookie-policy.html" class="text-white">Cookie Policy</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3 mb-4">
+                <h5 class="fw-bold mb-3">Newsletter</h5>
+                <p>Subscribe to get updates on surplus deals.</p>
+                <div class="input-group mb-3">
+                    <input type="email" class="form-control" placeholder="Your email">
+                    <button class="btn btn-success" type="button">Subscribe</button>
+                </div>
+            </div>
+        </div>
+        <hr class="my-4 bg-secondary">
+        <div class="text-center">
+            <p class="mb-0">&copy; 2023 FoodSave. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="main.js"></script>
+</body>
+</html>
